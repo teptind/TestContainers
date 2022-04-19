@@ -68,7 +68,6 @@ class UserService(
 
     @Transactional
     fun buyStocks(dto: BuyStockUserRequestDto): Mono<UserStocks> {
-        val a: Mono<User> = getUserByLogin(dto.login)
         return userRepository.findByLogin(dto.login)
             .switchIfEmpty(
                 Mono.error(UserNotFoundException("User with login ${dto.login} not exist. Please check your request"))
